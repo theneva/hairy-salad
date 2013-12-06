@@ -21,8 +21,13 @@ public class UserController
     @EJB
     private SessionBean sessionBean;
 
+    @EJB
+    private PriceCalculatorBean priceCalculatorBean;
+
+    private transient int saladPrice;
+
     // The salad components, either checked or unchecked.
-    private Map<SaladComponent, Boolean> saladComponentsUsed;
+    private transient Map<SaladComponent, Boolean> saladComponentsUsed;
 
     /** The ID of the user. */
     private String id;
@@ -64,7 +69,7 @@ public class UserController
             }
         }
 
-        if (used.size() < 4) return "salads"; // TODO worst validation ever.
+        if (used.size() < 0b100) return "salads"; // TODO worst validation ever.
 
         Salad newSalad = new Salad();
         newSalad.setComponents(used);
@@ -73,6 +78,8 @@ public class UserController
         user.getSalads().add(newSalad);
 
         this.sessionBean.update(user);
+
+        this.saladPrice = priceCalculatorBean.calculatePrice(newSalad);
 
         return "created?faces-redirect=true";
     }
@@ -105,5 +112,21 @@ public class UserController
     public void setId(String id)
     {
         this.id = id;
+    }
+
+    public PriceCalculatorBean getPriceCalculatorBean() {
+        return priceCalculatorBean;
+    }
+
+    public void setPriceCalculatorBean(PriceCalculatorBean priceCalculatorBean) {
+        this.priceCalculatorBean = priceCalculatorBean;
+    }
+
+    public int getSaladPrice() {
+        return saladPrice;
+    }
+
+    public void setSaladPrice(int saladPrice) {
+        this.saladPrice = saladPrice;
     }
 }
