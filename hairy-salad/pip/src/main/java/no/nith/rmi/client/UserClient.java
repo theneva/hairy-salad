@@ -18,12 +18,15 @@ import no.nith.rmi.util.InputHandler;
  */
 public class UserClient implements Client, Serializable
 {
+    /** The command which the user types in to exit the program. */
     public static final transient String LOGOUT_COMMAND = "/logout";
 
+    /** The session. */
     private Session session;
 
     public UserClient(final String host) throws RemoteException, NotBoundException
     {
+        // TODO the client starter could do this.
         this.connect(host);
         this.start();
     }
@@ -45,7 +48,7 @@ public class UserClient implements Client, Serializable
         this.session = this.getSession(server);
     }
 
-    public void start() throws RemoteException
+    private void start() throws RemoteException
     {
         // Request new messages until the user wants to leave.
         for (;;)
