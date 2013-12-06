@@ -26,6 +26,13 @@ public interface Session extends Remote, Serializable
     void close() throws RemoteException;
 
     /**
+     * Gets the keywords the user is subscribed to.
+     * 
+     * @return the keywords.
+     */
+    List<String> getKeywords() throws RemoteException;
+
+    /**
      * Sets the keywords the user is subscribed to.
      * 
      * @param keywords

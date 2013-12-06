@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import no.nith.rmi.client.UserClient;
-import no.nith.rmi.connection.PipSession;
+import no.nith.rmi.client.Client;
 import no.nith.rmi.connection.Session;
+import no.nith.rmi.connection.UserSession;
+import no.nith.rmi.server.util.ClientContainer;
 
 /**
  * GLHFDDDFU! Don't forget to commit!
@@ -21,8 +22,9 @@ public class PipServer implements Server, Serializable
     }
 
     @Override
-    public Session registerSession(UserClient client, String username, List<String> keywords) throws RemoteException
+    public Session registerSession(Client client, String username, List<String> keywords) throws RemoteException
     {
-        return new PipSession(client, username, keywords);
+        ClientContainer.getInstance().getClients().add(client);
+        return new UserSession(username, keywords);
     }
 }

@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * A simple Message containing a text body
- * and a set of keywords for sending to the server.
+ * A simple Message containing a text body and a set of keywords for sending to the server.
  */
 public class Message implements Serializable
 {
     private String message;
+
     private List<String> keywords;
 
     public Message(String message, List<String> keywords)
