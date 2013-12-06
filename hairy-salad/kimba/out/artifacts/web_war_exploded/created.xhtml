@@ -7,10 +7,10 @@
     <title></title>
 </head>
 <body>
-<h:form>
-    <h:outputLabel value="Skriv inn din ID: "/>
-    <h:inputText value="#{userController.id}"/>
-    <h:commandButton value="Logg inn!" action="#{userController.goToSalads}"/>
-</h:form>
+    Gratulerer! Salaten din er laget.
+
+    <h:form>
+        <h:commandButton value="Gå tilbake til oversikten" action="#{userController.goBackToSalads}"/>
+    </h:form>
 </body>
 </html>
